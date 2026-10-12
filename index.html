@@ -82,6 +82,7 @@
       position: relative;
       min-height: calc(100svh - 58px);
       display: grid;
+      grid-template-columns: minmax(0, 1fr);
       align-items: end;
       padding: 8vh 6vw 10vh;
       overflow: hidden;
@@ -95,7 +96,9 @@
     }
     .hero-copy {
       position: relative;
+      width: 100%;
       max-width: 46rem;
+      min-width: 0;
     }
     .eyebrow {
       margin: 0 0 1.1rem;
@@ -264,7 +267,8 @@
       .cards, .split, .contact-grid { grid-template-columns: 1fr; }
       .news a { grid-template-columns: 1fr; gap: 0.2rem; }
       header { align-items: flex-start; flex-direction: column; }
-      h1 { font-size: clamp(3.4rem, 18vw, 5.2rem); }
+      h1 { font-size: clamp(3.05rem, 15vw, 4.8rem); }
+      .lede, .lede-en { max-width: 100%; }
       section { padding: 3.6rem 6vw; }
     }
   </style>
