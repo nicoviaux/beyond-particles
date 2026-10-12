@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Beyond Particles · Departamento de Física USM</title>
+  <meta name="description" content="Beyond Particles es el grupo de Nicolás Viaux y sus estudiantes en el Departamento de Física de la Universidad Técnica Federico Santa María. Física de partículas, tomografía por muones y astropartículas.">
+  <meta property="og:title" content="Beyond Particles · Departamento de Física USM">
+  <meta property="og:description" content="Grupo de investigación de Nicolás Viaux y sus estudiantes. Física de partículas, muones y el universo que nos atraviesa.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CL">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23071018'/%3E%3Ccircle cx='10' cy='20' r='2' fill='%23d6b36a'/%3E%3Ccircle cx='22' cy='11' r='2' fill='%23e8e4da'/%3E%3Cpath d='M11 19 L21 12' stroke='%23d6b36a' stroke-width='1.4'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #071018;
+      --ink-2: #121a24;
+      --cream: #f4f0e6;
+      --cream-2: #e7e1d4;
+      --text: #e8e4da;
+      --muted: #b7b1a4;
+      --gold: #d6b36a;
+      --gold-2: #a8843e;
+      --line: rgba(214, 179, 106, 0.35);
+      --paper-text: #1c1914;
+      --paper-muted: #5c564c;
+      --max: 1080px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--text);
+      font-family: Outfit, system-ui, sans-serif;
+      font-weight: 400;
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    .skip {
+      position: absolute;
+      left: 1rem;
+      top: -4rem;
+      background: var(--gold);
+      color: var(--ink);
+      padding: 0.5rem 0.8rem;
+      z-index: 20;
+    }
+    .skip:focus { top: 1rem; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.85rem 6vw;
+      background: rgba(7, 16, 24, 0.86);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(232, 228, 218, 0.08);
+    }
+    .brand {
+      text-decoration: none;
+      font-weight: 560;
+      letter-spacing: 0.04em;
+      font-size: 0.92rem;
+    }
+    .brand span { color: var(--gold); }
+    nav { display: flex; flex-wrap: wrap; gap: 0.9rem 1.15rem; }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    nav a:hover { color: var(--cream); }
+    .hero {
+      position: relative;
+      min-height: calc(100svh - 58px);
+      display: grid;
+      align-items: end;
+      padding: 8vh 6vw 10vh;
+      overflow: hidden;
+    }
+    #sky {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .hero-copy {
+      position: relative;
+      max-width: 46rem;
+    }
+    .eyebrow {
+      margin: 0 0 1.1rem;
+      color: var(--gold);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 0.74rem;
+      font-weight: 500;
+    }
+    h1 {
+      margin: 0;
+      font-family: "Instrument Serif", Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(4.2rem, 12vw, 8.4rem);
+      line-height: 0.86;
+      letter-spacing: -0.03em;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .lede {
+      max-width: 38rem;
+      margin: 1.6rem 0 0;
+      font-size: 1.12rem;
+      color: var(--cream);
+    }
+    .lede-en {
+      max-width: 38rem;
+      margin: 0.7rem 0 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 1.8rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 0.72rem 1.15rem;
+      font-size: 0.92rem;
+    }
+    .btn-gold { background: var(--gold); color: var(--ink); font-weight: 560; }
+    .btn-ghost { border: 1px solid var(--line); color: var(--cream); }
+    .btn:hover { transform: translateY(-1px); }
+    section { padding: 5.5rem 6vw; }
+    .wrap { max-width: var(--max); margin: 0 auto; }
+    .paper { background: var(--cream); color: var(--paper-text); }
+    .kicker {
+      margin: 0;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 0.74rem;
+      color: var(--gold);
+    }
+    .paper .kicker { color: var(--gold-2); }
+    h2 {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(2.3rem, 5vw, 3.6rem);
+      line-height: 1.02;
+      margin: 0.4rem 0 1.4rem;
+      letter-spacing: -0.02em;
+    }
+    .intro { max-width: 42rem; margin: 0 0 2.2rem; font-size: 1.05rem; }
+    .paper .intro { color: var(--paper-muted); }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    article.card {
+      background: #fffdf8;
+      border: 1px solid rgba(28, 25, 20, 0.08);
+      border-radius: 18px;
+      padding: 1.35rem 1.3rem 1.45rem;
+    }
+    .num {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-style: italic;
+      color: var(--gold-2);
+      font-size: 1.35rem;
+    }
+    article h3 {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-weight: 400;
+      font-size: 1.65rem;
+      line-height: 1.15;
+      margin: 0.35rem 0 0.7rem;
+    }
+    article p { margin: 0 0 0.75rem; color: var(--paper-muted); }
+    article p:last-child { margin-bottom: 0; }
+    .split {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .who { margin: 0; font-size: 1.08rem; color: var(--cream); }
+    .who + .who { margin-top: 1rem; color: var(--muted); }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 1.4rem 1.35rem;
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .panel p { margin: 0.2rem 0; }
+    .panel .role { color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.72rem; }
+    .panel h3 {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-weight: 400;
+      font-size: 2rem;
+      margin: 0.25rem 0 0.8rem;
+    }
+    .meta { color: var(--muted); font-size: 0.95rem; }
+    .quote {
+      margin: 1.1rem 0 0;
+      font-family: "Instrument Serif", Georgia, serif;
+      font-style: italic;
+      font-size: 1.45rem;
+      line-height: 1.25;
+      color: var(--cream);
+    }
+    .news { display: grid; gap: 0.8rem; }
+    .news a {
+      display: grid;
+      grid-template-columns: 8.5rem 1fr;
+      gap: 1rem;
+      text-decoration: none;
+      padding: 1.05rem 0;
+      border-top: 1px solid rgba(28, 25, 20, 0.12);
+      color: var(--paper-text);
+    }
+    .news a:last-child { border-bottom: 1px solid rgba(28, 25, 20, 0.12); }
+    .news time { color: var(--gold-2); font-size: 0.92rem; }
+    .news strong { display: block; font-weight: 520; font-size: 1.08rem; }
+    .news span { color: var(--paper-muted); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2rem;
+    }
+    .mail {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      color: var(--gold);
+      text-decoration: none;
+      word-break: break-word;
+    }
+    .links { display: grid; gap: 0.45rem; margin-top: 1.3rem; }
+    .links a { color: var(--cream); }
+    address { font-style: normal; color: var(--muted); }
+    footer {
+      padding: 1.4rem 6vw 2rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(232, 228, 218, 0.08);
+    }
+    footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    @media (max-width: 860px) {
+      .cards, .split, .contact-grid { grid-template-columns: 1fr; }
+      .news a { grid-template-columns: 1fr; gap: 0.2rem; }
+      header { align-items: flex-start; flex-direction: column; }
+      h1 { font-size: clamp(3.4rem, 18vw, 5.2rem); }
+      section { padding: 3.6rem 6vw; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <header>
+    <a class="brand" href="#inicio">Beyond <span>Particles</span></a>
+    <nav aria-label="Secciones">
+      <a href="#investigacion">Investigación</a>
+      <a href="#grupo">Grupo</a>
+      <a href="#prensa">Prensa</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+  <main id="contenido">
+    <section class="hero" id="inicio">
+      <canvas id="sky" aria-hidden="true"></canvas>
+      <div class="hero-copy">
+        <p class="eyebrow">Departamento de Física · UTFSM</p>
+        <h1>Beyond<br><em>Particles</em></h1>
+        <p class="lede">Grupo de Nicolás Viaux y sus estudiantes. Estudiamos las partículas que atraviesan la materia y contamos ese universo a quien tenga curiosidad.</p>
+        <p class="lede-en">A research group at Universidad Técnica Federico Santa María, Campus San Joaquín.</p>
+        <div class="actions">
+          <a class="btn btn-gold" href="#investigacion">Líneas de trabajo</a>
+          <a class="btn btn-ghost" href="https://www.instagram.com/beyond.particles/" target="_blank" rel="noopener">Instagram del grupo</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="paper" id="investigacion">
+      <div class="wrap">
+        <p class="kicker">01 · Investigación</p>
+        <h2>Lo que medimos cuando la luz no alcanza.</h2>
+        <p class="intro">El grupo trabaja en física experimental de altas energías, tomografía con muones de rayos cósmicos y astropartículas. Son las líneas de Nicolás Viaux en la USM.</p>
+        <div class="cards">
+          <article class="card">
+            <div class="num">01</div>
+            <h3>ATLAS, en el CERN</h3>
+            <p>La Universidad Técnica Federico Santa María participa en ATLAS, uno de los experimentos del Gran Colisionador de Hadrones, en Ginebra.</p>
+            <p>Una contribución de la universidad fue la construcción de detectores de partículas tipo sTGC para la New Small Wheel, ya instalada y en funcionamiento.</p>
+          </article>
+          <article class="card">
+            <div class="num">02</div>
+            <h3>Tomografía por muones</h3>
+            <p>Los muones nacen cuando los rayos cósmicos chocan con la atmósfera. Atraviesan roca, tierra y concreto. Con detectores se reconstruye el interior de una estructura, parecido a una tomografía, sin una fuente artificial de radiación.</p>
+            <p>Sirve en minería, volcanes, cavidades, infraestructura crítica y el monitoreo de residuos nucleares. En junio de 2026, Nicolás Viaux fue expositor e instructor en Muographers, en Budapest.</p>
+          </article>
+          <article class="card">
+            <div class="num">03</div>
+            <h3>Astropartículas y neutrinos</h3>
+            <p>En su perfil de investigador figuran tres líneas: física de altas energías, astropartículas y física de neutrinos.</p>
+            <p>Son preguntas abiertas de la disciplina: de qué está hecha la materia oscura y cómo adquieren masa los neutrinos.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="grupo">
+      <div class="wrap split">
+        <div>
+          <p class="kicker">02 · El grupo</p>
+          <h2>Un académico y sus estudiantes.</h2>
+          <p class="who">Beyond Particles es el grupo del Dr. Nicolás Viaux en el Departamento de Física. Con sus estudiantes lleva la investigación y la divulgación: ciencia, física, espacio y tiempo.</p>
+          <p class="who">Nicolás Viaux es doctor en Astrofísica, profesor asistente en el Campus San Joaquín y coordinador de Vinculación con el Medio del departamento.</p>
+          <p class="quote">“Exploring the universe for curious minds.”</p>
+        </div>
+        <aside class="panel">
+          <p class="role">Investigador responsable</p>
+          <h3>Nicolás Viaux</h3>
+          <p class="meta">Profesor asistente<br>Departamento de Física<br>Campus San Joaquín, Santiago</p>
+          <p class="meta">ORCID 0000-0002-5102-9140</p>
+          <div class="links">
+            <a href="mailto:nicolas.viaux@usm.cl">nicolas.viaux@usm.cl</a>
+            <a href="https://www.instagram.com/beyond.particles/" target="_blank" rel="noopener">@beyond.particles</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="paper" id="prensa">
+      <div class="wrap">
+        <p class="kicker">03 · Prensa USM</p>
+        <h2>En las noticias de la universidad.</h2>
+        <div class="news">
+          <a href="https://usm.cl/noticias/academico-del-departamento-de-fisica-participa-en-congreso-internacional-sobre-tomografia-por-muones-en-hungria/" target="_blank" rel="noopener">
+            <time datetime="2026-07-01">1 julio 2026</time>
+            <div>
+              <strong>Congreso internacional de tomografía por muones en Hungría</strong>
+              <span>Expositor e instructor en Muographers 2026, con estudiantes de magíster y doctorado.</span>
+            </div>
+          </a>
+          <a href="https://usm.cl/noticias/investigadores-usm-participaran-en-visita-de-presidente-boric-al-cern-en-suiza/" target="_blank" rel="noopener">
+            <time datetime="2023-07-18">18 julio 2023</time>
+            <div>
+              <strong>La USM en la visita al CERN</strong>
+              <span>Nicolás Viaux, académico del Departamento de Física en el Campus San Joaquín, junto al equipo que trabaja en ATLAS.</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="wrap contact-grid">
+        <div>
+          <p class="kicker">04 · Contacto</p>
+          <h2>Escribe al grupo.</h2>
+          <a class="mail" href="mailto:nicolas.viaux@usm.cl">nicolas.viaux@usm.cl</a>
+          <p class="who">Estudiantes de la USM que quieran sumarse pueden escribir a ese correo o seguir el día a día en Instagram.</p>
+        </div>
+        <address>
+          Departamento de Física<br>
+          Universidad Técnica Federico Santa María<br>
+          Campus San Joaquín<br>
+          Santiago, Chile
+          <div class="links">
+            <a href="https://fisica.usm.cl/" target="_blank" rel="noopener">fisica.usm.cl</a>
+            <a href="https://orcid.org/0000-0002-5102-9140" target="_blank" rel="noopener">ORCID</a>
+            <a href="https://scholar.google.com/citations?user=M378ePQAAAAJ&amp;hl=es" target="_blank" rel="noopener">Google Scholar</a>
+            <a href="https://cris.usm.cl/entities/person/801e2665-843b-4c5e-ace2-815a661662e4" target="_blank" rel="noopener">Perfil CRIS USM</a>
+            <a href="https://www.instagram.com/beyond.particles/" target="_blank" rel="noopener">Instagram Beyond Particles</a>
+          </div>
+        </address>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap">
+      <span>Beyond Particles · Departamento de Física · UTFSM</span>
+      <span>Página del grupo. El sitio institucional es usm.cl.</span>
+    </div>
+  </footer>
+  <script>
+    (function () {
+      var canvas = document.getElementById("sky");
+      var ctx = canvas.getContext("2d");
+      var parts = [];
+      var running = true;
+      var dpr = 1;
+
+      function spawn(anywhere) {
+        return {
+          x: Math.random() * canvas.width,
+          y: anywhere ? Math.random() * canvas.height : -20,
+          v: (0.25 + Math.random() * 1.15) * dpr,
+          drift: (Math.random() - 0.5) * 0.35 * dpr,
+          r: (Math.random() < 0.07 ? 1.7 : 0.65) * dpr,
+          hot: Math.random() < 0.07
+        };
+      }
+
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = canvas.offsetWidth * dpr;
+        canvas.height = canvas.offsetHeight * dpr;
+        var n = Math.max(28, Math.min(80, Math.floor(canvas.offsetWidth / 16)));
+        parts = [];
+        for (var i = 0; i < n; i++) parts.push(spawn(true));
+      }
+
+      function frame() {
+        if (!running) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < parts.length; i++) {
+          var p = parts[i];
+          ctx.beginPath();
+          ctx.fillStyle = p.hot ? "rgba(214,179,106,0.85)" : "rgba(232,228,218,0.45)";
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+          if (p.hot) {
+            ctx.strokeStyle = "rgba(214,179,106,0.28)";
+            ctx.lineWidth = dpr;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p.x - p.drift * 28, p.y - p.v * 28);
+            ctx.stroke();
+          }
+          p.y += p.v;
+          p.x += p.drift;
+          if (p.y > canvas.height + 20) parts[i] = spawn(false);
+        }
+        requestAnimationFrame(frame);
+      }
+
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      resize();
+      if (reduce) {
+        running = false;
+        frame = null;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var j = 0; j < parts.length; j++) {
+          var q = parts[j];
+          ctx.fillStyle = q.hot ? "rgba(214,179,106,0.8)" : "rgba(232,228,218,0.4)";
+          ctx.beginPath();
+          ctx.arc(q.x, q.y, q.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      } else {
+        requestAnimationFrame(frame);
+      }
+      window.addEventListener("resize", resize);
+      document.addEventListener("visibilitychange", function () {
+        if (reduce) return;
+        if (document.hidden) running = false;
+        else if (!running) { running = true; requestAnimationFrame(frame); }
+      });
+    })();
+  </script>
+</body>
+</html>
